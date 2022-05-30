@@ -167,10 +167,10 @@ public class PessoaDAO {
 			PreparedStatement pstm = cn.prepareStatement(query);
 			pstm.setString(1, p.getCpf());
 			pstm.setString(2, p.getSenha());
+			p = new Pessoa();
 			
-			ResultSet res = pstm.executeQuery();
+			ResultSet res = pstm.executeQuery();			
 			while(res.next()) {
-				p = new Pessoa();
 				p.setCpf(res.getString("cpf"));
 				p.setNome(res.getString("nome"));
 				
