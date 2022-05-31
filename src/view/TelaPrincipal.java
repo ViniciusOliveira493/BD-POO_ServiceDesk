@@ -11,16 +11,28 @@ import javafx.stage.Stage;
 import model.Pessoa;
 
 public class TelaPrincipal extends Application{
-	Stage stage;
+	private Stage stage;
 	
+	private CenaLogin login;
+	private CenaCadastro cad;
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("Service Desk - Login");
+		this.stage = stage;
 		Pane pn =  new Pane();
-		
-		CenaLogin login = new CenaLogin(pn,stage,this);
+		Pane pn2 =  new Pane();
+		login = new CenaLogin(pn,stage,this);
+		cad = new CenaCadastro(pn2, stage, this);
 		stage.setScene(login);
 		stage.show();
+	}
+	
+	public void cadastrar(){
+		stage.setScene(cad);
+	}
+	
+	public void login() {
+		stage.setScene(login);
 	}
 	public static void main(String[] args) {
 		Application.launch(args);
