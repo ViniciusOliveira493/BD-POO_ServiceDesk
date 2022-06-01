@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -60,50 +61,25 @@ public class CenaLogin extends Scene implements EventHandler<ActionEvent>{
 		vb.getChildren().add(hb1);
 	}
 	
-	private void criarLblCadastrar(VBox vb) {
-		HBox hb1 = new HBox();
-		Label lblCadastrar = new Label();
-		lblCadastrar.setText("Cadastrar");
-		hb1.getChildren().add(lblCadastrar);
-		vb.getChildren().add(hb1);
-	}
-	
-	private void criarTxtNome(VBox vb) {
-		HBox hb2 = new HBox();
-		Label lblNome = new Label();
-		lblNome.setText("Nome: ");
-		txtNome = new TextField();
-		hb2.getChildren().addAll(lblNome,txtCpf);
-		vb.getChildren().add(hb2);
-	}	
-	
 	private void criarTxtCpf(VBox vb) {
-		HBox hb2 = new HBox();
+		GridPane hb2 = new GridPane();
 		Label lblCpf = new Label();
 		lblCpf.setText("CPF: ");
 		txtCpf = new TextField();
-		hb2.getChildren().addAll(lblCpf,txtCpf);
+		hb2.add(lblCpf,0,0);
+		hb2.add(txtCpf,1,0);
 		vb.getChildren().add(hb2);
 	}
 	
 	private void criarTxtSenha(VBox vb) {
-		HBox hb3 = new HBox();
+		GridPane hb3 = new GridPane();
 		Label lblSenha = new Label();
 		lblSenha.setText("Senha: ");
 		txtSenha = new PasswordField();
-		hb3.getChildren().addAll(lblSenha,txtSenha);
+		hb3.add(lblSenha,0,0);
+		hb3.add(txtSenha,1,0);
 		vb.getChildren().add(hb3);
 	}
-	
-	private void criarTxtConfSenha(VBox vb) {
-		HBox hb3 = new HBox();
-		Label lblSenha = new Label();
-		lblSenha.setText("Confirmar senha: ");
-		txtConfSenha = new PasswordField();
-		hb3.getChildren().addAll(lblSenha,txtConfSenha);
-		vb.getChildren().add(hb3);
-	}
-	
 	
 	private void criarBotoes(VBox vb) {
 		btnEntrar = new Button("Entrar");
