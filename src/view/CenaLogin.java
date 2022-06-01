@@ -31,10 +31,9 @@ public class CenaLogin extends Scene implements EventHandler<ActionEvent>{
 	Pane root;
 	TelaPrincipal tp;
 	VBox vb;
-	public CenaLogin(Pane root,Stage stg,TelaPrincipal tp) {
+	public CenaLogin(Pane root,TelaPrincipal tp) {
 		super(root,300,400);
 		this.root = root;
-		this.stg = stg;
 		this.tp = tp;
 		
 		vb = new VBox();
@@ -105,12 +104,13 @@ public class CenaLogin extends Scene implements EventHandler<ActionEvent>{
 	
 	@Override
 	public void handle(ActionEvent event) {
+		/*
 		if(event.getSource() == btnEntrar) {
 			Pessoa p = ctrl.login(boundaryToEntity());
-			Home hm = new Home(p);
+			
 			if(p.getNome() != null && p.getNome()!="") {
 				try {
-					hm.start(stg);
+					tp.home(p);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -123,5 +123,9 @@ public class CenaLogin extends Scene implements EventHandler<ActionEvent>{
 		}else {
 			tp.cadastrar();
 		}
+		*/
+		Pessoa p = new Pessoa();
+		p.setNome("Teste - Reativar Login");
+		tp.home(p);
 	}
 }

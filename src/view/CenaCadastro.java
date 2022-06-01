@@ -25,14 +25,12 @@ public class CenaCadastro extends Scene implements EventHandler<ActionEvent>{
 	Button btnCadastrar;
 	Button btnVoltar;
 	PessoaController ctrl = new PessoaController();
-	Stage stg;
 	Pane root;
 	TelaPrincipal tp;
 	VBox vb;
-	public CenaCadastro(Pane root,Stage stg,TelaPrincipal tp) {
+	public CenaCadastro(Pane root,TelaPrincipal tp) {
 		super(root,300,400);
 		this.root = root;
-		this.stg = stg;
 		this.tp = tp;
 		
 		vb = new VBox();
