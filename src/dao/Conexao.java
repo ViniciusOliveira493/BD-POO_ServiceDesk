@@ -9,10 +9,10 @@ public class Conexao {
 	private String login = "root";
 	private String senha = "123456";
 	private String bd = "bdServiceDesk";
-	private final String DB_ATUAL = "MariaDb";
+	private final Boolean MARIADB = true;
 	
 	public Connection getConexao() {
-		if(DB_ATUAL.equals("MariaDb")) {
+		if(MARIADB) {
 			return getConexaoMDB();
 		}else {
 			return getConexaoSqlServer();

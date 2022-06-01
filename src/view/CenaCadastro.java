@@ -48,8 +48,8 @@ public class CenaCadastro extends Scene implements EventHandler<ActionEvent>{
 		criarLblCadastrar(vb);
 		criarTxtCpf(vb);
 		criarTxtNome(vb);
-		//criarTxtSenha(vb);
-		//criarTxtConfSenha(vb);
+		criarTxtSenha(vb);
+		criarTxtConfSenha(vb);
 		criarBotoes(vb);
 		
 		vb.setVisible(true);
@@ -69,7 +69,7 @@ public class CenaCadastro extends Scene implements EventHandler<ActionEvent>{
 		Label lblNome = new Label();
 		lblNome.setText("Nome: ");
 		txtNome = new TextField();
-		hb2.getChildren().addAll(lblNome,txtCpf);
+		hb2.getChildren().addAll(lblNome,txtNome);
 		vb.getChildren().add(hb2);
 	}	
 	
@@ -102,7 +102,7 @@ public class CenaCadastro extends Scene implements EventHandler<ActionEvent>{
 	
 	
 	private void criarBotoes(VBox vb) {
-		btnCadastrar = new Button("Entrar");
+		btnCadastrar = new Button("Cadastrar");
 		btnVoltar = new Button("Voltar");
 		
 		btnCadastrar.addEventFilter(ActionEvent.ANY, this);
@@ -119,14 +119,42 @@ public class CenaCadastro extends Scene implements EventHandler<ActionEvent>{
 	private Pessoa boundaryToEntity() {
 		Pessoa p = new Pessoa();
 		p.setCpf(txtCpf.getText());
+		p.setNome(txtNome.getText());
 		p.setSenha(txtSenha.getText());
 		return p;
+	}
+	
+	private void limparCampos() {
+		txtCpf.setText(null); 
+		txtNome.setText(null);
+		txtSenha.setText(null);
+		txtConfSenha.setText(null);
 	}
 	
 	@Override
 	public void handle(ActionEvent event) {
 		if(event.getSource() == btnCadastrar) {
-			//TO DO
+			if(txtSenha.getText().equals(txtConfSenha.getText())) {
+				Pessoa p = boundaryToEntity();
+				boolean a = ctrl.create(p);
+				if(a) {
+					Alert al = new Alert(AlertType.INFORMATION);
+					al.setTitle("Cadastrado Com Sucesso");
+					al.setContentText("Você está cadastrado no sistema");
+					al.show();
+					limparCampos();
+				}else {
+					Alert al = new Alert(AlertType.ERROR);
+					al.setTitle("ERRO");
+					al.setContentText("Algo deu errado!");
+					al.show();
+				}
+			}else {
+				Alert a = new Alert(AlertType.INFORMATION);
+				a.setTitle("A confirmação falhou");
+				a.setContentText("verifique se a senha e confirmar senha são iguais");
+				a.show();
+			}
 		}else {
 			tp.login();
 		}
