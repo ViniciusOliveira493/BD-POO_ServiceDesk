@@ -15,14 +15,15 @@ public class TelaPrincipal extends Application{
 	
 	private CenaLogin login;
 	private CenaCadastro cad;
+	private Home hm;
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("Service Desk - Login");
 		this.stage = stage;
 		Pane pn =  new Pane();
 		Pane pn2 =  new Pane();
-		login = new CenaLogin(pn,stage,this);
-		cad = new CenaCadastro(pn2, stage, this);
+		login = new CenaLogin(pn,this);
+		cad = new CenaCadastro(pn2, this);
 		stage.setScene(login);
 		stage.show();
 	}
@@ -34,7 +35,17 @@ public class TelaPrincipal extends Application{
 	public void login() {
 		stage.setScene(login);
 	}
+	
+	public void home(Pessoa p) {
+		Pane pn3 =  new Pane();
+		hm = new Home(pn3,p,this);
+		stage.setScene(hm);
+		stage.centerOnScreen();
+	}
 	public static void main(String[] args) {
 		Application.launch(args);
+	}
+	public Stage getStage() {
+		return this.stage;
 	}
 }

@@ -1,25 +1,33 @@
 package view;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import model.Pessoa;
 
-public class Home extends Application{
+public class Home extends Scene{
+	private GridPane gp;
 	private Pessoa pessoa;
-	public Home(Pessoa p) {
-		this.pessoa = p;		
+	private TelaPrincipal tp;
+	public Home(Pane root,Pessoa p,TelaPrincipal tp) {
+		super(root,1000,600);
+		this.pessoa = p;	
+		this.tp = tp;
+		gp = new GridPane();
+		gp.setGridLinesVisible(true);
+		init();
+		root.getChildren().add(gp);
 	}
 
-	@Override
-	public void start(Stage stage) throws Exception {
-		stage.setTitle("Home - ["+pessoa.getNome()+"]");
-		
-		Pane pn =  new Pane();
-		Scene scn = new Scene(pn,1000,600);
-		stage.setScene(scn);
-		stage.centerOnScreen();
-		stage.show();
+	public void init() {
+		tp.getStage().setTitle("Home - ["+pessoa.getNome()+"]");
+		PaneSideMenu csm = new PaneSideMenu(this);
+		gp.add(csm, 0, 0);
+		paneMeusDados();
+	}
+	
+	public void paneMeusDados() {
+		PaneMeusDados pmd = new PaneMeusDados();
+		gp.add(pmd, 1, 0);
 	}
 }
