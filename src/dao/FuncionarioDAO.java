@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Funcionario;
 import model.Pessoa;
@@ -64,18 +65,18 @@ public class FuncionarioDAO extends PessoaDAO{
 	}
 	
 	public Boolean update(Funcionario f){
-		
+		return false;
 	}
 	
 	public Boolean delete(Funcionario f){
-		
+		return false;
 	}
 		
 	public Pessoa search(Funcionario f){
-		
+		return new Pessoa();
 	}
 
-	public ArrayList<Funcionario> list(int pagina,int itensPagina){
-		
+	public List<Funcionario> listar(int pagina,int itensPagina){
+		return new ArrayList<Funcionario>();
 	}
 }
