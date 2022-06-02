@@ -55,12 +55,11 @@ public class PessoaDAO {
 	    return p;
 	}
 	
-	public Boolean update(Pessoa p){
+	public Boolean updateName(Pessoa p){
 		String query="UPDATE tbpessoa"
-				+ " SET"
-				+ "	nome = ?"
-				+ " , senha = ?"
-				+ " WHERE cpf = ?";
+				+ " SET "
+				+ "	nome=?"
+				+ " WHERE cpf=?";
 		Conexao conn = new Conexao();
 		Connection cn = null;
 		boolean r = false;
@@ -68,8 +67,30 @@ public class PessoaDAO {
 			cn = conn.getConexao();
 			PreparedStatement pstm = cn.prepareStatement(query);
 			pstm.setString(1, p.getNome());
-			pstm.setString(2, p.getSenha());
-			pstm.setString(3, p.getCpf());
+			pstm.setString(2, p.getCpf());
+			pstm.execute();
+			r = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			conn.close(cn);
+		}
+		return r;
+	}
+	
+	public Boolean updateSenha(Pessoa p){
+		String query="UPDATE tbpessoa"
+				+ " SET "
+				+ "	senha = ?"
+				+ " WHERE cpf = ?";
+		Conexao conn = new Conexao();
+		Connection cn = null;
+		boolean r = false;
+		try {
+			cn = conn.getConexao();
+			PreparedStatement pstm = cn.prepareStatement(query);
+			pstm.setString(1, p.getSenha());
+			pstm.setString(2, p.getCpf());
 			pstm.execute();
 			r = true;
 		} catch (Exception e) {

@@ -1,13 +1,14 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Pessoa {
 	private String cpf;
 	private String nome;
 	private String senha;
 	private boolean funcionario = false; 
-	private ArrayList<String> enderecos = new ArrayList<String>();
+	private List<Endereco> enderecos = new ArrayList<Endereco>();
 	
 	public String getCpf() {
 		return cpf;
@@ -27,10 +28,10 @@ public class Pessoa {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public ArrayList<String> getEnderecos() {
+	public List<Endereco> getEnderecos() {
 		return enderecos;
 	}
-	public void setEnderecos(ArrayList<String> enderecos) {
+	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
 	public boolean isFuncionario() {

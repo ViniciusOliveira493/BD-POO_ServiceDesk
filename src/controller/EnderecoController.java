@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dao.EnderecoDAO;
 import model.Endereco;
@@ -16,7 +17,7 @@ public class EnderecoController {
 		return dao.read(id);
 	}
 	
-	public boolean update(Endereco[] endereco){
+	public boolean update(List<Endereco> endereco){
 		return dao.update(endereco);
 	}
 	

@@ -104,7 +104,7 @@ public class CenaLogin extends Scene implements EventHandler<ActionEvent>{
 	
 	@Override
 	public void handle(ActionEvent event) {
-		/*
+		
 		if(event.getSource() == btnEntrar) {
 			Pessoa p = ctrl.login(boundaryToEntity());
 			
@@ -123,9 +123,12 @@ public class CenaLogin extends Scene implements EventHandler<ActionEvent>{
 		}else {
 			tp.cadastrar();
 		}
-		*/
+		/*
 		Pessoa p = new Pessoa();
-		p.setNome("Teste - Reativar Login");
+		p.setCpf("12345678909");
+		p.setSenha("123mudar");
+		p = ctrl.login(p);
 		tp.home(p);
+		*/		
 	}
 }
