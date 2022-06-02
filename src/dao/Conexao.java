@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Conexao {
 	private String server = "localhost:3306";
 	private String login = "root";
-	private String senha = "123456";
+	private String senha = "alunofatec";
 	private String bd = "bdServiceDesk";
 	private final Boolean MARIADB = true;
 	

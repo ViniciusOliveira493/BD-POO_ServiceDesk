@@ -12,6 +12,8 @@ public class Home extends Scene{
 	private TelaPrincipal tp;
 	private PaneMeusDados pmd;
 	private PaneAlterarSenha pas;
+	private PaneGerenciarFuncionarios pgf;
+	
 	private PessoaController ctrlp = new PessoaController();
 	public Home(Pane root,Pessoa p,TelaPrincipal tp) {
 		super(root,1000,600);
@@ -28,8 +30,13 @@ public class Home extends Scene{
 		
 		pmd = new PaneMeusDados(pessoa);
 		gp.add(pmd, 1, 0);
+		
 		pas = new PaneAlterarSenha(pessoa);
 		gp.add(pas, 1, 0);
+		
+		pgf = new PaneGerenciarFuncionarios();
+		gp.add(pgf, 1, 0);
+		
 	}
 	
 	public void init() {
@@ -44,9 +51,11 @@ public class Home extends Scene{
 		pmd.setVisible(true);
 		
 	}
-
-	public void paneCadFuncionario() {
-		System.out.println("funcionário");
+	
+	public void paneGerenciarFuncionarios() {
+		hideAll();
+		pgf.setVisible(true);
+		
 	}
 
 	public void alterarSenha() {
@@ -62,5 +71,6 @@ public class Home extends Scene{
 	private void hideAll() {
 		pmd.setVisible(false);
 		pas.setVisible(false);
+		pgf.setVisible(false);
 	}
 }
