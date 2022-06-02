@@ -55,7 +55,7 @@ public class PaneSideMenu extends Pane implements EventHandler<ActionEvent>{
 		if(event.getSource() == btnMeusDados){
 			hm.paneMeusDados();
 		}else if(event.getSource() == btnCadastrarFuncionario){
-			hm.paneCadFuncionario();
+			hm.paneGerenciarFuncionarios();
 		}else if(event.getSource() == btnAltSenha){
 			hm.alterarSenha();
 		}
