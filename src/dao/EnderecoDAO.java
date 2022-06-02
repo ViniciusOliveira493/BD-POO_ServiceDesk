@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Endereco;
 import model.Pessoa;
@@ -58,7 +59,7 @@ public class EnderecoDAO {
 		return ende;
 	}
 	
-	public boolean update(Endereco[] endereco){
+	public boolean update(List<Endereco> endereco){
 		String query="DELETE FROM tbEndereco WHERE pessoaCPF = ?";
 		Conexao conn = new Conexao();
 		Connection cn = null;
@@ -66,7 +67,7 @@ public class EnderecoDAO {
 		try {
 			cn = conn.getConexao();
 			PreparedStatement pstm = cn.prepareStatement(query);
-			pstm.setString(1, endereco[0].getPessoaCPF());
+			pstm.setString(1, endereco.get(0).getPessoaCPF());
 			pstm.execute();
 			r = true;
 		} catch (Exception e) {
@@ -75,8 +76,8 @@ public class EnderecoDAO {
 			conn.close(cn);
 		}
 		
-		for (int i=0;i<endereco.length;i++) {
-			if(!create(endereco[i])) {
+		for (Endereco e : endereco) {
+			if(!create(e)) {
 				r=false;
 			}
 		}
