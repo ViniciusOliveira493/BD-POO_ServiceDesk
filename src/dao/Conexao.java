@@ -5,11 +5,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexao {
-	private String server = "localhost:3306";
+	private String server = "localhost";
 	private String login = "root";
-	private String senha = "123456";
+	private String senhaMDB = "123456";
+	private String senha = "12345678";
 	private String bd = "bdServiceDesk";
-	private final Boolean MARIADB = true;
+	private final Boolean MARIADB = false;
 	
 	public Connection getConexao() {
 		if(MARIADB) {
@@ -19,7 +20,6 @@ public class Conexao {
 		}
 	}
 	
-	//ainda não está funcionando
 	public Connection getConexaoSqlServer() {
 		String path = "jdbc:sqlserver://"+server+";"
         + "databaseName="+bd+";"
@@ -44,7 +44,7 @@ public class Conexao {
 		Connection conn = null;
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection(path,login,senha);
+			conn = DriverManager.getConnection(path,login,senhaMDB);
 			return conn;
 		}catch(Exception e) {
 			e.printStackTrace();
