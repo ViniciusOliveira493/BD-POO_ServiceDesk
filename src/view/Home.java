@@ -13,6 +13,7 @@ public class Home extends Scene{
 	private PaneMeusDados pmd;
 	private PaneAlterarSenha pas;
 	private PaneGerenciarFuncionarios pgf;
+	private PaneGerenciarProdutos pgp;
 	
 	private PessoaController ctrlp = new PessoaController();
 	public Home(Pane root,Pessoa p,TelaPrincipal tp) {
@@ -36,6 +37,9 @@ public class Home extends Scene{
 		
 		pgf = new PaneGerenciarFuncionarios();
 		gp.add(pgf, 1, 0);
+		
+		pgp = new PaneGerenciarProdutos();
+		gp.add(pgp, 1, 0);
 		
 	}
 	
@@ -63,6 +67,11 @@ public class Home extends Scene{
 		pas.setVisible(true);	
 	}
 	
+	public void gerenciarProdutos() {
+		hideAll();		
+		pgp.setVisible(true);		
+	}
+	
 	public void atualizar() {
 		pessoa = ctrlp.read(pessoa.getCpf());
 		tp.getStage().setTitle("Home - ["+pessoa.getNome()+"]");
@@ -72,5 +81,7 @@ public class Home extends Scene{
 		pmd.setVisible(false);
 		pas.setVisible(false);
 		pgf.setVisible(false);
+		pgp.setVisible(false);
 	}
+	
 }

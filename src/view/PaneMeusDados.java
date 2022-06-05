@@ -56,24 +56,10 @@ public class PaneMeusDados extends Pane implements EventHandler<ActionEvent>{
 		criarTxtCpf(vb);
 		criarTxtNome(vb);
 		
-		/*
-		criarLblAltSenha(vb);
-		criarTxtSenhaAnterior(vb);		
-		criarTxtSenha(vb);
-		criarTxtConfSenha(vb);
-		*/
 		criarTable(vb);
 		criarBotoesTb(vb);
 		
 		criarBotoes(vb);
-	}
-	
-	private void criarLblAltSenha(VBox vb) {
-		HBox hb1 = new HBox();
-		Label lblAltSenha = new Label();
-		lblAltSenha.setText("Alterar Senha");
-		hb1.getChildren().add(lblAltSenha);
-		vb.getChildren().add(hb1);
 	}
 	
 	private void criarTxtNome(VBox vb) {
@@ -95,33 +81,6 @@ public class PaneMeusDados extends Pane implements EventHandler<ActionEvent>{
 		txtCpf.setEditable(false);
 		hb3.getChildren().addAll(lblCpf,txtCpf);
 		vb.getChildren().add(hb3);
-	}
-	
-	private void criarTxtSenhaAnterior(VBox vb) {
-		HBox hb4 = new HBox();
-		Label lblSenhaAnterior = new Label();
-		lblSenhaAnterior.setText("Senha Antiga: ");
-		txtSenhaAnterior = new PasswordField();
-		hb4.getChildren().addAll(lblSenhaAnterior,txtSenhaAnterior);
-		vb.getChildren().add(hb4);
-	}
-	
-	private void criarTxtSenha(VBox vb) {
-		HBox hb4 = new HBox();
-		Label lblSenha = new Label();
-		lblSenha.setText("Senha: ");
-		txtSenha = new PasswordField();
-		hb4.getChildren().addAll(lblSenha,txtSenha);
-		vb.getChildren().add(hb4);
-	}
-	
-	private void criarTxtConfSenha(VBox vb) {
-		HBox hb5 = new HBox();
-		Label lblSenha = new Label();
-		lblSenha.setText("Confirmar senha: ");
-		txtConfSenha = new PasswordField();
-		hb5.getChildren().addAll(lblSenha,txtConfSenha);
-		vb.getChildren().add(hb5);
 	}
 	
 	private void criarTable(VBox vb) {
@@ -172,32 +131,6 @@ public class PaneMeusDados extends Pane implements EventHandler<ActionEvent>{
 		
 		hb4.getChildren().addAll(btnAdd,btnEdit,btnRemove);
 		vb.getChildren().add(hb4);
-	}
-	
-	@Override
-	public void handle(ActionEvent event) {
-		if(event.getSource().equals(btnRemove)) {	
-			int id = obterTableSelecionado();	
-			if(id>=0) {
-				apagarEndereco(id);
-			}
-		}else if(event.getSource().equals(btnAdd)){
-			addEndereco();
-		}else if(event.getSource().equals(btnEdit)){
-			int id = obterTableSelecionado();
-			if(id>=0) {
-				editarEndereco(id);
-			}			
-		}else if(event.getSource().equals(btnSalvar)){
-			pessoa.setNome(txtNome.getText());
-			boolean res = ctrlPess.update(pessoa);
-			if(res) {
-				Alerta a = new Alerta(AlertType.INFORMATION,"Sucesso","Os dados foram atualizados");
-			}else {
-				Alerta a = new Alerta(AlertType.ERROR,"Erro","Algo deu errado");
-			}
-		}
-		
 	}
 	
 	private int obterTableSelecionado() {
@@ -291,5 +224,31 @@ public class PaneMeusDados extends Pane implements EventHandler<ActionEvent>{
 		this.enderecos.clear();
 		this.enderecos.addAll(pessoa.getEnderecos());
 		this.table.refresh();
+	}
+	
+	@Override
+	public void handle(ActionEvent event) {
+		if(event.getSource().equals(btnRemove)) {	
+			int id = obterTableSelecionado();	
+			if(id>=0) {
+				apagarEndereco(id);
+			}
+		}else if(event.getSource().equals(btnAdd)){
+			addEndereco();
+		}else if(event.getSource().equals(btnEdit)){
+			int id = obterTableSelecionado();
+			if(id>=0) {
+				editarEndereco(id);
+			}			
+		}else if(event.getSource().equals(btnSalvar)){
+			pessoa.setNome(txtNome.getText());
+			boolean res = ctrlPess.update(pessoa);
+			if(res) {
+				Alerta a = new Alerta(AlertType.INFORMATION,"Sucesso","Os dados foram atualizados");
+			}else {
+				Alerta a = new Alerta(AlertType.ERROR,"Erro","Algo deu errado");
+			}
+		}
+		
 	}
 }

@@ -11,6 +11,7 @@ public class PaneSideMenu extends Pane implements EventHandler<ActionEvent>{
 	Button btnMeusDados;
 	Button btnCadastrarFuncionario;
 	Button btnAltSenha;
+	Button btnProdutos;
 	
 	Home hm;
 	public PaneSideMenu(Home hm) {
@@ -24,6 +25,7 @@ public class PaneSideMenu extends Pane implements EventHandler<ActionEvent>{
 		criarBtnMeusDados(vb);
 		criarBtnAltSenha(vb);
 		criarBtnCadFuncionario(vb);
+		criarBtnProdutos(vb);
 	}
 	
 	private void criarBtnMeusDados(VBox vb) {
@@ -50,6 +52,14 @@ public class PaneSideMenu extends Pane implements EventHandler<ActionEvent>{
 		vb.getChildren().add(hb1);
 	}
 	
+	private void criarBtnProdutos(VBox vb) {
+		HBox hb1 = new HBox();
+		btnProdutos = new Button("Gerenciar Produtos");
+		btnProdutos.addEventHandler(ActionEvent.ANY, this);
+		hb1.getChildren().add(btnProdutos);
+		vb.getChildren().add(hb1);
+	}
+	
 	@Override
 	public void handle(ActionEvent event) {
 		if(event.getSource() == btnMeusDados){
@@ -58,6 +68,8 @@ public class PaneSideMenu extends Pane implements EventHandler<ActionEvent>{
 			hm.paneGerenciarFuncionarios();
 		}else if(event.getSource() == btnAltSenha){
 			hm.alterarSenha();
+		}else if(event.getSource() == btnProdutos){
+			hm.gerenciarProdutos();
 		}
 		
 	}

@@ -40,8 +40,8 @@ public class PessoaController {
 		return dao.search(p);
 	}
 
-	public ArrayList<Pessoa> list(int pagina,int itensPagina){
-		return dao.list(pagina,itensPagina);
+	public ArrayList<Pessoa> list(){
+		return dao.list();
 	}
 	
 	public Pessoa login(Pessoa p){
