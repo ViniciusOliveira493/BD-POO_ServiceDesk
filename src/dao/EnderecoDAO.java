@@ -9,7 +9,7 @@ import java.util.List;
 import model.Endereco;
 import model.Pessoa;
 
-public class EnderecoDAO {
+public class EnderecoDAO extends DAO{
 	public boolean create(Endereco ende){
 		String query="INSERT INTO tbEndereco(pessoaCPF,cep,numero,logradouro,descricao) VALUES(?,?,?,?,?)";
 		Conexao conn = new Conexao();

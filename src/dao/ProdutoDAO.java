@@ -8,7 +8,7 @@ import java.util.List;
 
 import model.Produto;
 
-public class ProdutoDAO {
+public class ProdutoDAO extends DAO{
 	public Boolean create(Produto p){
 		String query = "INSERT INTO tbproduto(nome) VALUES(?)";
 		Conexao conn = new Conexao();
@@ -36,6 +36,28 @@ public class ProdutoDAO {
 			cn = conn.getConexao();
 			PreparedStatement pstm = cn.prepareStatement(query);
 			pstm.setInt(1, p.getId());
+			ResultSet res = pstm.executeQuery();
+			while(res.next()) {
+				p.setNome(res.getString("nome"));
+				p.setId(res.getInt("id"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close(cn);
+		}
+		return p;
+	}
+	
+	public Produto read(int id){
+		Produto p = new Produto();
+		String query = "SELECT id,nome from tbproduto Where id = ?";
+		Conexao conn = new Conexao();
+		Connection cn = null;
+		try {
+			cn = conn.getConexao();
+			PreparedStatement pstm = cn.prepareStatement(query);
+			pstm.setInt(1, id);
 			ResultSet res = pstm.executeQuery();
 			while(res.next()) {
 				p.setNome(res.getString("nome"));

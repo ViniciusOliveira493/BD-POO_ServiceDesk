@@ -21,7 +21,7 @@ public class FuncionarioDAO extends PessoaDAO{
 			cn = conn.getConexao();
 			PreparedStatement pstm = cn.prepareStatement(query);
 			pstm.setString(1, f.getCpf());
-			pstm.setInt(2, f.getEquipeId());
+			pstm.setInt(2, f.getEquipe().getid());
 			pstm.setInt(3, f.getNivel());
 			pstm.execute();
 			r = true;
@@ -53,7 +53,7 @@ public class FuncionarioDAO extends PessoaDAO{
 				ResultSet res= pstm.executeQuery();
 				while(res.next()) {
 					f.setNivel(res.getInt("nivel"));
-					f.setEquipeId(res.getInt("equipeId"));
+					//f.setEquipe(res.getInt("equipeId"));//precisa do crud equipe
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -78,7 +78,7 @@ public class FuncionarioDAO extends PessoaDAO{
 		try {
 			cn = conn.getConexao();
 			PreparedStatement pstm = cn.prepareStatement(query);
-			pstm.setInt(1, f.getEquipeId());
+			//pstm.setInt(1, f.getEquipeId());//precisa do crud equipe
 			pstm.setInt(2, f.getNivel());
 			pstm.setString(3, f.getCpf());
 			pstm.execute();
@@ -127,7 +127,7 @@ public class FuncionarioDAO extends PessoaDAO{
 				
 				ResultSet res= pstm.executeQuery();
 				while(res.next()) {
-					f.setEquipeId(res.getInt("equipeId"));
+					//f.setEquipeId(res.getInt("equipeId"));//precisa do crud equipe
 					f.setNivel(res.getInt("nivel"));
 				}
 			} catch (Exception e) {
