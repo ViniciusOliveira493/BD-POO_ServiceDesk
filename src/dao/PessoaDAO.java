@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import model.Pessoa;
 
-public class PessoaDAO {
+public class PessoaDAO extends DAO{
 	public Boolean create(Pessoa p){
 		String query = "INSERT INTO tbPessoa(cpf,nome,senha) VALUES(?,?,?)";
 		Conexao conn = new Conexao();
