@@ -154,16 +154,14 @@ public class PessoaDAO {
 	    return p;
 	}
 
-	public ArrayList<Pessoa> list(int pagina,int itensPagina){
+	public ArrayList<Pessoa> list(){
 		ArrayList<Pessoa> pessoas = new ArrayList<Pessoa>();
-		String query="SELECT cpf,nome FROM tbPessoa Limit ?,?";
+		String query="SELECT cpf,nome FROM tbPessoa";
 		Conexao conn = new Conexao();
 		Connection cn = null;
 		try {
 			cn = conn.getConexao();
 			PreparedStatement pstm = cn.prepareStatement(query);
-			pstm.setInt(1, (itensPagina*pagina));
-			pstm.setInt(2, itensPagina);
 			ResultSet res= pstm.executeQuery();
 			while(res.next()) {
 				Pessoa p = new Pessoa();
