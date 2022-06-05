@@ -12,6 +12,8 @@ public class PaneSideMenu extends Pane implements EventHandler<ActionEvent>{
 	Button btnCadastrarFuncionario;
 	Button btnAltSenha;
 	Button btnProdutos;
+	Button btnSolicitacao;
+	Button btnAtenderSolicitacao;
 	
 	Home hm;
 	public PaneSideMenu(Home hm) {
@@ -26,6 +28,8 @@ public class PaneSideMenu extends Pane implements EventHandler<ActionEvent>{
 		criarBtnAltSenha(vb);
 		criarBtnCadFuncionario(vb);
 		criarBtnProdutos(vb);
+		criarBtnSolicitacao(vb);
+		criarBtnAtenderSolicitacao(vb);
 	}
 	
 	private void criarBtnMeusDados(VBox vb) {
@@ -60,6 +64,22 @@ public class PaneSideMenu extends Pane implements EventHandler<ActionEvent>{
 		vb.getChildren().add(hb1);
 	}
 	
+	private void criarBtnAtenderSolicitacao(VBox vb) {
+		HBox hb1 = new HBox();
+		btnAtenderSolicitacao = new Button("Atender Solicitacoes");
+		btnAtenderSolicitacao.addEventHandler(ActionEvent.ANY, this);
+		hb1.getChildren().add(btnAtenderSolicitacao);
+		vb.getChildren().add(hb1);
+	}
+	
+	private void criarBtnSolicitacao(VBox vb) {
+		HBox hb1 = new HBox();
+		btnSolicitacao = new Button("Gerenciar Solicitações");
+		btnSolicitacao.addEventHandler(ActionEvent.ANY, this);
+		hb1.getChildren().add(btnSolicitacao);
+		vb.getChildren().add(hb1);
+	}
+	
 	@Override
 	public void handle(ActionEvent event) {
 		if(event.getSource() == btnMeusDados){
@@ -70,6 +90,10 @@ public class PaneSideMenu extends Pane implements EventHandler<ActionEvent>{
 			hm.alterarSenha();
 		}else if(event.getSource() == btnProdutos){
 			hm.gerenciarProdutos();
+		}else if(event.getSource() == btnSolicitacao){
+			hm.gerenciarSolicitacao();
+		}else if(event.getSource() == btnAtenderSolicitacao){
+			hm.atenderSolicitacoes();
 		}
 		
 	}
