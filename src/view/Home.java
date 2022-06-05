@@ -14,6 +14,8 @@ public class Home extends Scene{
 	private PaneAlterarSenha pas;
 	private PaneGerenciarFuncionarios pgf;
 	private PaneGerenciarProdutos pgp;
+	private PaneGerenciarSolicitacao pgs;
+	private PaneAtenderSolicitacoes pasc;
 	
 	private PessoaController ctrlp = new PessoaController();
 	public Home(Pane root,Pessoa p,TelaPrincipal tp) {
@@ -28,6 +30,7 @@ public class Home extends Scene{
 	private void startGridPane() {
 		gp = new GridPane();
 		gp.setGridLinesVisible(true);
+		gp.setHgap(30);
 		
 		pmd = new PaneMeusDados(pessoa);
 		gp.add(pmd, 1, 0);
@@ -41,6 +44,11 @@ public class Home extends Scene{
 		pgp = new PaneGerenciarProdutos();
 		gp.add(pgp, 1, 0);
 		
+		pgs = new PaneGerenciarSolicitacao();
+		gp.add(pgs, 1, 0);	
+		
+		pasc = new PaneAtenderSolicitacoes();
+		gp.add(pasc, 1, 0);	
 	}
 	
 	public void init() {
@@ -72,9 +80,19 @@ public class Home extends Scene{
 		pgp.setVisible(true);		
 	}
 	
+	public void atenderSolicitacoes() {
+		hideAll();		
+		pasc.setVisible(true);		
+	}
+	
 	public void atualizar() {
 		pessoa = ctrlp.read(pessoa.getCpf());
 		tp.getStage().setTitle("Home - ["+pessoa.getNome()+"]");
+	}
+	
+	public void gerenciarSolicitacao() {
+		hideAll();		
+		pgs.setVisible(true);		
 	}
 	
 	private void hideAll() {
@@ -82,6 +100,9 @@ public class Home extends Scene{
 		pas.setVisible(false);
 		pgf.setVisible(false);
 		pgp.setVisible(false);
+		pgs.setVisible(false);
+		pasc.setVisible(false);
 	}
+	
 	
 }
