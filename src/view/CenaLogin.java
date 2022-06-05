@@ -126,7 +126,7 @@ public class CenaLogin extends Scene implements EventHandler<ActionEvent>{
 		*/
 		Pessoa p = new Pessoa();
 		p.setCpf("12345678909");
-		p.setSenha("123");
+		p.setSenha("123mudar");
 		p = ctrl.login(p);
 		tp.home(p);
 		
