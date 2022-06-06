@@ -58,10 +58,14 @@ public class PaneGerenciarProdutos extends Pane implements EventHandler<ActionEv
 		col3.setCellValueFactory(new PropertyValueFactory<>("totalSolicitacao"));		
 		
 		TableColumn<Produto, Date> col4 = new TableColumn<>("Solicitações na Semana");
-		col4.setCellValueFactory(new PropertyValueFactory<>("solicitacaoSemana"));
+		col4.setCellValueFactory(new PropertyValueFactory<>("totalSolicitacaoSemana"));
 		
-		table.getColumns().addAll(col1,col2,col3,col4);
+		TableColumn<Produto, String> col5 = new TableColumn<>("Status");
+		col5.setCellValueFactory(new PropertyValueFactory<>("estado"));		
+		
+		table.getColumns().addAll(col1,col2,col3,col4,col5);
 		table.setItems(this.produtos);
+		table.setMinWidth(500);
 		vb.getChildren().add(table);
 	}
 	

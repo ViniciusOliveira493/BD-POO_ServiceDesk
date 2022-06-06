@@ -4,8 +4,21 @@ public class Produto {
 	private int id;
 	private String nome;
 	private int totalSolicitacao;
-	private int solicitacaoSemana;
+	private int totalSolicitacaoSemana;
+	private String estado;
 	
+	public int getTotalSolicitacaoSemana() {
+		return totalSolicitacaoSemana;
+	}
+	public void setTotalSolicitacaoSemana(int totalSolicitacaoSemana) {
+		this.totalSolicitacaoSemana = totalSolicitacaoSemana;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 	public String getNome() {
 		return nome;
 	}
@@ -18,12 +31,7 @@ public class Produto {
 	public void setTotalSolicitacao(int totalSolicitacao) {
 		this.totalSolicitacao = totalSolicitacao;
 	}
-	public int getSolicitacaoSemana() {
-		return solicitacaoSemana;
-	}
-	public void setSolicitacaoSemana(int solicitacaoSemana) {
-		this.solicitacaoSemana = solicitacaoSemana;
-	}
+	
 	public int getId() {
 		return id;
 	}

@@ -132,6 +132,10 @@ public class ProdutoDAO extends DAO{
 					p = new Produto();
 					p.setId(res.getInt("id"));
 					p.setNome(res.getString("nome"));
+					Produto p2 = obterNumeroSolicitacoes(p.getId());
+					p.setEstado(p2.getEstado());
+					p.setTotalSolicitacao(p2.getTotalSolicitacao());
+					p.setTotalSolicitacaoSemana(p2.getTotalSolicitacaoSemana());
 					lista.add(p);
 				}
 			} catch (Exception e) {
@@ -141,5 +145,71 @@ public class ProdutoDAO extends DAO{
 			}				
 		}
 	    return lista;
+	}
+	
+	private Produto obterNumeroSolicitacoes(int id) {
+		int qtd = 0;
+		String query = "SELECT COUNT(so.id) as total_solicitacoes "
+				+ " FROM tbproduto AS prod "
+				+ "	INNER JOIN tbsolicitacao AS so "
+				+ "		ON so.produtoId = prod.id "
+				+ " WHERE prod.id = ?"
+				+ " GROUP BY prod.id";
+		Conexao conn = new Conexao();
+		Connection cn = null;
+		try {
+			cn = conn.getConexao();
+			PreparedStatement pstm = cn.prepareStatement(query);
+			pstm.setInt(1, id);
+			ResultSet res = pstm.executeQuery();
+			while(res.next()) {
+				qtd = res.getInt("total_solicitacoes");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close(cn);
+		}
+		Produto p = obterSolicitacoesSemanaEStatus(id);
+		p.setTotalSolicitacao(qtd);
+		return p;
+	}
+	
+	private Produto obterSolicitacoesSemanaEStatus(int id) {
+		Produto p = new Produto();
+		int qtd = 0;
+		String query = "SELECT \r\n"
+				+ "	COUNT(so.id) as total_solicitacoes\r\n"
+				+ "	, CASE WHEN COUNT(so.id)>30\r\n"
+				+ "		THEN\r\n"
+				+ "			'Alerta'\r\n"
+				+ "		WHEN COUNT(so.id)>10\r\n"
+				+ "			THEN\r\n"
+				+ "			'Atenção'\r\n"
+				+ "		ELSE\r\n"
+				+ "			'OK'\r\n"
+				+ "	  END AS estado\r\n"
+				+ "FROM tbproduto AS prod\r\n"
+				+ "	INNER JOIN tbsolicitacao AS so\r\n"
+				+ "		ON so.produtoId = prod.id\r\n"
+				+ "WHERE prod.id = ? AND so.dataSolicitacao > DATEADD(DAY,-7,GETDATE())\r\n"
+				+ "GROUP BY prod.id";
+		Conexao conn = new Conexao();
+		Connection cn = null;
+		try {
+			cn = conn.getConexao();
+			PreparedStatement pstm = cn.prepareStatement(query);
+			pstm.setInt(1, id);
+			ResultSet res = pstm.executeQuery();
+			while(res.next()) {
+				p.setTotalSolicitacaoSemana(res.getInt("total_solicitacoes"));
+				p.setEstado(res.getString("estado"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close(cn);
+		}
+		return p;
 	}
 }

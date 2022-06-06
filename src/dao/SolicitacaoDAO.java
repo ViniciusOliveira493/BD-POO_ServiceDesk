@@ -15,7 +15,7 @@ public class SolicitacaoDAO extends DAO{
 	public Boolean create(Solicitacao s){
 		String query = "INSERT INTO tbsolicitacao(descricaoProblema,dataSolicitacao,"
 				+ "produtoId,tipoProblema,setorId,"
-				+ "solicitanteCpf) VALUES(?,?,?,?,?,?,?)";
+				+ "solicitanteCpf) VALUES(?,?,?,?,?,?)";
 		Conexao conn = new Conexao();
 		Connection cn = null;
 		boolean r = false;
@@ -130,7 +130,7 @@ public class SolicitacaoDAO extends DAO{
 	public List<Solicitacao> listar(Funcionario func){
 		List<Solicitacao> lista = new ArrayList<Solicitacao>();
 		
-		String query = "SELECT * from tbproduto Where setorId = ";
+		String query = "SELECT * from tbproduto Where setorId = ?";
 		Conexao conn = new Conexao();
 		Connection cn = null;
 		try {
