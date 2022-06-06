@@ -23,7 +23,6 @@ public class PessoaController {
 		boolean b = ctrlEnd.update(p.getEnderecos());
 		if(b) {
 			b = dao.updateName(p);
-			System.out.println("update pessoa" + p.getCpf());
 		}
 		return b;
 	}

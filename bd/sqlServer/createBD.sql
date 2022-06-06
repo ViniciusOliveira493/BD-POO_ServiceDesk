@@ -17,6 +17,7 @@ CREATE TABLE tbPessoa(
 	cpf						CHAR(11)						NOT NULL	CHECK(LEN(cpf)=11)
 	, nome					VARCHAR(100)					NOT NULL
 	, senha					VARCHAR(64)						NOT NULL	DEFAULT('123mudar')
+	, telefone				VARCHAR(11)						NOT NULL
 	PRIMARY KEY(cpf)
 ); 
 CREATE TABLE tbFuncionario(
@@ -52,8 +53,8 @@ CREATE TABLE tbSolicitacao(
 	id						INTEGER IDENTITY(1,1)			NOT NULL
 	, descricaoProblema		TEXT							NOT NULL
 	, dataSolicitacao		DATE							NOT NULL
-	, dataResolucao			DATE							NOT NULL
-	, descricaoResulucao	TEXT							NOT NULL
+	, dataResolucao			DATE							
+	, descricaoResulucao	TEXT							
 	, produtoId				INTEGER							NOT NULL
 	, tipoProblema			INTEGER							NOT NULL
 	, setorId				INTEGER							NOT NULL
@@ -64,15 +65,6 @@ CREATE TABLE tbSolicitacao(
 	, FOREIGN KEY (tipoProblema) REFERENCES  tbTipoProblema(id)
 	, FOREIGN KEY (setorId) REFERENCES tbSetor(id)
 	, FOREIGN KEY (solicitanteCpf) REFERENCES  tbPessoa(cpf)
-);
-CREATE TABLE tbMensagem(
-	pessoaCPF				CHAR(11)						NOT NULL	CHECK(LEN(pessoaCPF)=11)
-	, solicitacaoId			INTEGER							NOT NULL
-	, dataEHora				DATE							NOT NULL
-	, texto					VARCHAR(240)					NOT NULL
-	PRIMARY KEY(pessoaCPF,solicitacaoId,dataEHora)
-	FOREIGN KEY (pessoaCPF) REFERENCES tbPessoa(cpf)
-	, FOREIGN KEY (solicitacaoId) REFERENCES tbSolicitacao(id)
 );
 CREATE TABLE tbChamado(
 	id						INTEGER IDENTITY(1,1)			NOT NULL
@@ -94,8 +86,8 @@ CREATE TABLE tbAtendente(
 	, FOREIGN KEY (pessoaCPF) REFERENCES tbPessoa(cpf)
 );
 --=====================INSERTS================---
-INSERT INTO tbPessoa(cpf,nome)
-	VALUES('12345678909','Admin')
+INSERT INTO tbPessoa(cpf,nome,telefone)
+	VALUES('12345678909','Admin','11976859456')
 
 INSERT INTO tbEndereco(pessoaCPF,cep,numero,logradouro,descricao)
 	VALUES('12345678909','03694000',2983,'Avenida Águia de Haia','Endereco interno')
