@@ -7,6 +7,8 @@ public class Pessoa {
 	private String cpf;
 	private String nome;
 	private String senha;
+	private String telefone;
+	
 	private boolean funcionario = false; 
 	private List<Endereco> enderecos = new ArrayList<Endereco>();
 	
@@ -42,6 +44,12 @@ public class Pessoa {
 	}
 	@Override
 	public String toString() {
-		return "{"+cpf+" | "+nome+"|"+funcionario+"}";
+		return "{"+cpf+" | "+nome+" | "+telefone+"}";
+	}
+	public String getTelefone() {
+		return telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 }

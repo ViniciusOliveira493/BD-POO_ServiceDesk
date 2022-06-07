@@ -29,8 +29,8 @@ SELECT pessoaCpf FROM tbFuncionario Limit ?,?
 
 --===================== Cargo Funcionário
 SELECT	
-	p.cpf
-	, p.nome
+	p.cpf AS cpf
+	, f.equipeId as equipe
 	, CASE WHEN f.nivel = 0 THEN		
 			'ADMIN'
 		WHEN f.nivel = 1 THEN
@@ -41,7 +41,7 @@ SELECT
 FROM tbFuncionario AS f
 	INNER JOIN tbPessoa AS p
 		ON p.cpf = f.pessoaCpf
-
+WHERE p.nome LIKE ?
 --===== Funcionarios na equipe
 SELECT
 	COUNT(fun.pessoaCpf)
@@ -56,7 +56,6 @@ FROM tbFuncionario AS func
 	INNER JOIN tbPessoa AS p
 		ON p.cpf = func.pessoaCpf
 WHERE p.senha = '123mudar'
-GROUP BY p.nome
 --====== quais funcionarios estão com a senha padrao
 select 
 	p.cpf

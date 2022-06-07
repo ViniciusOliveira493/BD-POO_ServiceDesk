@@ -30,8 +30,11 @@ public class PaneGerenciarFuncionarios extends Pane implements EventHandler<Acti
 	private Button btnPesquisar;
 	private Button btnRemove;
 	private Button btnEdit;
+	private Button btnObterFuncSenhapadrao;
 	
-	public PaneGerenciarFuncionarios() {		
+	private int nivelFunc = 50;
+	public PaneGerenciarFuncionarios(int nivelFuncionario) {
+		nivelFunc = nivelFuncionario;
 		VBox vb = new VBox();
 		init(vb);
 		this.getChildren().add(vb);
@@ -43,6 +46,8 @@ public class PaneGerenciarFuncionarios extends Pane implements EventHandler<Acti
 		criarBotoesNome(vb);
 		criarTable(vb);
 		criarBotoesTb(vb);
+		criarBtnFuncSenhaPadrao(vb);
+		alertaSenhaPadrao();
 	}
 	
 	private void criarTable(VBox vb) {
@@ -92,7 +97,15 @@ public class PaneGerenciarFuncionarios extends Pane implements EventHandler<Acti
 		hb4.getChildren().addAll(btnEdit,btnRemove);
 		vb.getChildren().add(hb4);
 	}
-	
+	private void criarBtnFuncSenhaPadrao(VBox vb) {
+		btnObterFuncSenhapadrao = new Button("Funcionarios com senha padrao");	
+		btnObterFuncSenhapadrao.addEventFilter(ActionEvent.ANY, this);
+		
+		HBox hb4 = new HBox();
+		hb4.setSpacing(10);
+		hb4.getChildren().add(btnObterFuncSenhapadrao);
+		vb.getChildren().add(hb4);
+	}
 	private void criarTxtNome(VBox vb) {
 		HBox hb2 = new HBox();
 		Label lblNome = new Label();
@@ -173,6 +186,16 @@ public class PaneGerenciarFuncionarios extends Pane implements EventHandler<Acti
 		}else if(event.getSource().equals(btnEdit)) {
 			editarFunc();
 			atualizar("");
+		}else if(event.getSource().equals(btnObterFuncSenhapadrao)) {
+			Alerta a = new Alerta(AlertType.INFORMATION,"Funcionarios",ctrl.funcionariosSenhaPadrão());
 		}
+	}
+	private void alertaSenhaPadrao() {
+		if(nivelFunc == 0) {
+			int qtd = ctrl.contarFuncSenhaPadrao();
+			if(qtd>0) {
+				Alerta a = new Alerta(AlertType.WARNING,"Alerta de Segurança","existem "+qtd+" Funcionários utilizando a senha padrão");
+			}
+		}		
 	}
 }
