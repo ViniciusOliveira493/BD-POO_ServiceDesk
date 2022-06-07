@@ -40,7 +40,7 @@ public class FuncionarioDAO extends PessoaDAO{
 		f.setEnderecos(p.getEnderecos());
 		f.setFuncionario(p.isFuncionario());
 		if(f.getCpf()!=null || f.getCpf()!="") {
-			String query="SELECT equipeId,nivel FROM tbfuncionario WHERE cpf=?";
+			String query="SELECT equipeId,nivel FROM tbfuncionario WHERE pessoaCpf=?";
 			Conexao conn = new Conexao();
 			Connection cn = null;
 			try {
@@ -178,5 +178,63 @@ public class FuncionarioDAO extends PessoaDAO{
 			conn.close(cn);
 		}	
 	    return funcionarios;
+	}
+	
+	public int contarFuncSenhaPadrao() {
+		String query="select \r\n"
+				+ "		COUNT(func.pessoaCpf) AS senhas\r\n"
+				+ "	FROM tbFuncionario AS func\r\n"
+				+ "		INNER JOIN tbPessoa AS p\r\n"
+				+ "			ON p.cpf = func.pessoaCpf\r\n"
+				+ "	WHERE p.senha = '123mudar'\r\n";
+		Conexao conn = new Conexao();
+		Connection cn = null;
+		int qtd = 0;
+		try {
+			cn = conn.getConexao();
+			PreparedStatement pstm = cn.prepareStatement(query);
+			ResultSet res=pstm.executeQuery();
+			while(res.next()) {
+				qtd = res.getInt("senhas");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			conn.close(cn);
+		}	
+		return qtd;
+		
+	}
+	
+	public String funcionariosSenhaPadrão() {
+		String query="select \r\n"
+				+ "		p.cpf\r\n"
+				+ "		, p.nome\r\n"
+				+ "		, p.telefone\r\n"
+				+ "	FROM tbFuncionario AS func\r\n"
+				+ "		INNER JOIN tbPessoa AS p\r\n"
+				+ "			ON p.cpf = func.pessoaCpf\r\n"
+				+ "	WHERE p.senha = '123mudar'\r\n"
+				+ "	GROUP BY p.nome,p.cpf,p.telefone";
+		Conexao conn = new Conexao();
+		Connection cn = null;
+		String txt = "";
+		try {
+			cn = conn.getConexao();
+			PreparedStatement pstm = cn.prepareStatement(query);
+			ResultSet res=pstm.executeQuery();
+			while(res.next()) {
+				Pessoa p = new Pessoa();
+				p.setCpf(res.getString("cpf"));
+				p.setNome(res.getString("nome"));
+				p.setTelefone(res.getString("telefone"));
+				txt += p.toString()+"\n";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			conn.close(cn);
+		}	
+		return txt;
 	}
 }

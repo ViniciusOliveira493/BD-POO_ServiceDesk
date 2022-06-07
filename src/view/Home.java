@@ -1,9 +1,11 @@
 package view;
 
+import controller.FuncionarioController;
 import controller.PessoaController;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import model.Funcionario;
 import model.Pessoa;
 
 public class Home extends Scene{
@@ -18,6 +20,7 @@ public class Home extends Scene{
 	private PaneAtenderSolicitacoes pasc;
 	
 	private PessoaController ctrlp = new PessoaController();
+	private FuncionarioController ctrlf = new FuncionarioController();
 	public Home(Pane root,Pessoa p,TelaPrincipal tp) {
 		super(root,1000,600);
 		this.pessoa = p;
@@ -36,8 +39,11 @@ public class Home extends Scene{
 		
 		pas = new PaneAlterarSenha(pessoa);
 		gp.add(pas, 1, 0);
+		Funcionario f = new Funcionario();
+		f.setCpf(pessoa.getCpf());
+		f = ctrlf.read(f);
 		
-		pgf = new PaneGerenciarFuncionarios();
+		pgf = new PaneGerenciarFuncionarios(f.getNivel());
 		gp.add(pgf, 1, 0);
 		
 		pgp = new PaneGerenciarProdutos();

@@ -30,4 +30,10 @@ public class FuncionarioController {
 	public List<Funcionario> listar(String nome){
 		return dao.listar(nome);
 	}
+	public int contarFuncSenhaPadrao() {
+		return dao.contarFuncSenhaPadrao();
+	}
+	public String funcionariosSenhaPadrão() {
+		return dao.funcionariosSenhaPadrão();
+	}
 }
