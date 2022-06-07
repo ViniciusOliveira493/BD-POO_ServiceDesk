@@ -29,7 +29,6 @@ public class Home extends Scene{
 	}
 	private void startGridPane() {
 		gp = new GridPane();
-		gp.setGridLinesVisible(true);
 		gp.setHgap(30);
 		
 		pmd = new PaneMeusDados(pessoa);

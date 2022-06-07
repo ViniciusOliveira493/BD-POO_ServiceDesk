@@ -27,7 +27,7 @@ public class FuncionarioController {
 		return dao.search(f);
 	}
 
-	public List<Funcionario> listar(){
-		return dao.listar();
+	public List<Funcionario> listar(String nome){
+		return dao.listar(nome);
 	}
 }
